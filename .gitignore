@@ -1,0 +1,10 @@
+# Rust
+/target/
+
+# Nix
+/.direnv/
+/result
+
+# Postgres
+/logfile
+.s.*.lock
