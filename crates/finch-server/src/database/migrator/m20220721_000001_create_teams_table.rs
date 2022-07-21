@@ -14,16 +14,16 @@ impl MigrationTrait for Migration {
         manager
             .create_table(
                 Table::create()
-                    .table(Team::Table)
+                    .table(Teams::Table)
                     .col(
-                        ColumnDef::new(Team::Id)
+                        ColumnDef::new(Teams::Id)
                             .integer()
                             .not_null()
                             .auto_increment()
                             .primary_key(),
                     )
-                    .col(ColumnDef::new(Team::Name).string().not_null())
-                    .col(ColumnDef::new(Team::Number).integer().not_null())
+                    .col(ColumnDef::new(Teams::Name).string().not_null())
+                    .col(ColumnDef::new(Teams::Number).integer().not_null())
                     .to_owned(),
             )
             .await
@@ -31,13 +31,13 @@ impl MigrationTrait for Migration {
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
-            .drop_table(Table::drop().table(Team::Table).to_owned())
+            .drop_table(Table::drop().table(Teams::Table).to_owned())
             .await
     }
 }
 
 #[derive(Iden)]
-pub enum Team {
+pub enum Teams {
     Table,
     Id,
     Name,

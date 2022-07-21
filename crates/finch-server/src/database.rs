@@ -1,14 +1,12 @@
+pub mod entities;
 pub mod migrator;
 
 use sea_orm::{ConnectionTrait, Database, DatabaseConnection, Statement};
 use sea_orm_migration::{MigratorTrait, SchemaManager};
 
-use crate::{
-    database::migrator::Migrator,
-    error::{Error, Result},
-};
+use crate::{database::migrator::Migrator, error::Result};
 
-pub const DATABASE_URL: &str = "postgres://localhost:5432";
+pub const DATABASE_URL: &str = "postgres://bob:users@localhost:5432";
 
 pub async fn construct_database() -> Result<DatabaseConnection> {
     let database = Database::connect(DATABASE_URL).await?;

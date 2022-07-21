@@ -1,6 +1,6 @@
 use sea_orm_migration::prelude::*;
 
-use super::m20220721_000001_create_teams_table::Team;
+use super::m20220721_000001_create_teams_table::Teams;
 
 pub struct Migration;
 
@@ -16,25 +16,21 @@ impl MigrationTrait for Migration {
         manager
             .create_table(
                 Table::create()
-                    .table(User::Table)
+                    .table(Users::Table)
                     .col(
-                        ColumnDef::new(User::Id)
+                        ColumnDef::new(Users::Id)
                             .integer()
                             .not_null()
                             .auto_increment()
                             .primary_key(),
                     )
-                    .col(ColumnDef::new(User::Name).string().not_null())
-                    .col(
-                        ColumnDef::new(User::Permissions)
-                            .enumeration("permissions", vec!["member", "mentor", "superuser"]),
-                    )
-                    .col(ColumnDef::new(User::TeamId).integer().not_null())
+                    .col(ColumnDef::new(Users::Name).string().not_null())
+                    .col(ColumnDef::new(Users::TeamId).integer().not_null())
                     .foreign_key(
                         ForeignKey::create()
                             .name("fk-user-team_id")
-                            .from(User::Table, User::TeamId)
-                            .to(Team::Table, Team::Id),
+                            .from(Users::Table, Users::TeamId)
+                            .to(Teams::Table, Teams::Id),
                     )
                     .to_owned(),
             )
@@ -43,16 +39,15 @@ impl MigrationTrait for Migration {
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
-            .drop_table(Table::drop().table(User::Table).to_owned())
+            .drop_table(Table::drop().table(Users::Table).to_owned())
             .await
     }
 }
 
 #[derive(Iden)]
-pub enum User {
+pub enum Users {
     Table,
     Id,
     Name,
-    Permissions,
     TeamId,
 }

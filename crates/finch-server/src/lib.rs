@@ -24,12 +24,18 @@ pub async fn app() -> Result<Router> {
         .layer(TraceLayer::new_for_http())
         .layer(CorsLayer::permissive())
         .layer(AddExtensionLayer::new(database))
-        .layer(authorizer.jwt_layer(authority))
         .into_inner();
 
-    let router = Router::new()
+    let unauthorized_routes = Router::new().route("/example_public", get(handlers::example_public));
+
+    let authorized_routes = Router::new()
+        .route("/example_private", get(handlers::example_private))
         .route("/create_user", post(handlers::create_user))
+        .layer(authorizer.jwt_layer(authority));
+
+    let app = unauthorized_routes
+        .merge(authorized_routes)
         .layer(middleware_stack);
 
-    Ok(router)
+    Ok(app)
 }

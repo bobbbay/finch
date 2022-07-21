@@ -9,13 +9,15 @@ tower = { version = "0.4", features = ["full"] }
 tower-http = { version = "0.2", features = ["full"] }
 tokio = { version = "1.20.0", features = ["full"] }
 thiserror = "1.0.31"
-aliri_axum = "0.1.1"
-aliri = "0.6.0"
-aliri_oauth2 = { version = "0.8.0", features = ["rsa", "tokio", "reqwest"] }
-aliri_tower = "0.2.0"
-aliri_clock = "0.1.4"
 serde = { version = "1.0.139", features = ["derive"] }
 reqwest = "0.11.11"
 sea-orm = { version = "0.9.0", features = ["sqlx-postgres", "runtime-tokio-rustls"] }
 futures = "0.3.21"
 sea-orm-migration = "0.9.0"
+aliri = "0.6.0"
+aliri_oauth2 = "0.8.0"
+aliri_tower = "0.2.0"
+aliri_clock = "0.1.4"
+aliri_axum = "0.1.1"
+
+[features]
