@@ -1,0 +1,5 @@
+---
+source: crates/finch-server/tests/health.rs
+expression: body
+---
+b""

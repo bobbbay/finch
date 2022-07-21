@@ -6,7 +6,7 @@
     root = ./.;
 
     overrides.shell = common: prev: {
-      packages = prev.packages ++ (with common.pkgs; [ pkg-config openssl.dev postgresql ]);
+      packages = prev.packages ++ (with common.pkgs; [ pkg-config openssl.dev postgresql cargo-insta ]);
     };
   };
 }

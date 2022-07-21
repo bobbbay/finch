@@ -19,5 +19,9 @@ aliri_oauth2 = "0.8.0"
 aliri_tower = "0.2.0"
 aliri_clock = "0.1.4"
 aliri_axum = "0.1.1"
+hyper = { version = "0.14.20", features = ["full"] }
 
 [features]
+
+[dev-dependencies]
+insta = "1.15.0"
